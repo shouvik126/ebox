@@ -1,0 +1,225 @@
+1.
+Main.java:====
+  import java.io.*;
+import java.util.*;
+
+class Main {
+
+    public static void main(String[] args)throws IOException  {
+		
+		Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the player name");
+        String s=sc.nextLine();
+        System.out.println("Enter the player age");
+        int age=sc.nextInt();
+        if(age<19)
+        {
+            try
+            {
+                throw new CustomException("InvalidAgeRangeException");
+            }
+            catch(CustomException e)
+            {
+                System.out.println(e);
+            }
+        }
+        else
+        {
+            System.out.println("Player name : "+s);
+            System.out.println("Player age : "+age);
+        }
+        
+
+}
+}
+
+CustomException.java:================
+ class CustomException extends Exception
+{
+    
+    public CustomException(String s)
+    {
+     super(s);   
+    }
+    
+}
+---------------------------------------------------------------------------------------------------------
+2.
+Main java:=====
+import java.util.*;
+import java.io.*;
+class Main
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int f1=1,f2=1;
+        System.out.println("Enter the expected winner team of IPL Season 4");
+        String s1=sc.nextLine();
+        if(s1.equals("Chennai Super Kings")==false && s1.equals("Deccan Chargers")==false && s1.equals("Delhi Daredevils")==false && s1.equals("Kings XI Punjab")==false && 
+        s1.equals("Kolkata Knight Riders")==false && s1.equals("Mumbai Indians")==false && s1.equals("Rajasthan Royals")==false && s1.equals("Royal Challengers Bangalore")==false )
+        {
+            f1=0;
+            try
+            {
+                throw new TeamNameNotFoundException("Entered team is not a part of IPL Season 4");
+            }
+            catch(TeamNameNotFoundException e)
+            {
+                System.out.println(e);
+            }
+            
+        }
+        String s2="";
+        if(f1==1)
+        {
+        System.out.println("Enter the expected runner Team of IPL Season 4");
+        s2=sc.nextLine();
+        if(s2.equals("Chennai Super Kings")==false && s2.equals("Deccan Chargers")==false && s2.equals("Delhi Daredevils")==false && s2.equals("Kings XI Punjab")==false && 
+        s2.equals("Kolkata Knight Riders")==false && s2.equals("Mumbai Indians")==false && s2.equals("Rajasthan Royals")==false && s2.equals("Royal Challengers Bangalore")==false )
+        {
+            f2=0;
+            try
+            {
+                throw new TeamNameNotFoundException("Entered team is not a part of IPL Season 4");
+            }
+            catch(TeamNameNotFoundException e)
+            {
+                System.out.println(e);
+            }
+            
+        }}
+        
+        if(f1==1 && f2==1)
+        {
+            System.out.println("Expected IPL Season 4 winner: "+s1);
+            System.out.println("Expected IPL Season 4 runner: "+s2);
+        }
+    }
+}
+
+TeamNameNotFoundException.java:============
+public class TeamNameNotFoundException extends Exception
+{
+    public TeamNameNotFoundException(String s)
+    {
+        super(s);
+    }
+} 
+---------------------------------------------------------------------------------------------------------------------
+3.
+Main.java:===========
+import java.util.*;
+import java.io.*;
+public class Main
+{
+    public static void main(String args[])
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter the total runs scored");
+        float run=sc.nextInt();
+        System.out.println("Enter the total overs faced");
+        float over=sc.nextInt();
+        if(over>0 && over<=20)
+        {
+            //System.out.print("Current Run Rate :");
+            //System.out.printf("Current Run Rate :%.2d %n",run/over);
+            System.out.printf("Current Run Rate :%.2f %n", run/over);
+        }
+        else
+        {
+            try
+            {
+                throw new OverRangeException("Over is not in the specified range");
+            }
+            catch(OverRangeException e)
+            {
+                System.out.println(e);
+            }
+        }
+    }
+}
+
+OverRangeException.java:=========
+public class OverRangeException extends Exception
+{
+    public OverRangeException(String s)
+    {
+        super(s);
+    }
+}
+------------------------------------------------------------------------------------------------------------
+4.
+Main.java:=====
+import java.io.*;
+import java.util.*;
+
+public class Main {
+    public static void main(String[] args)throws IOException {
+
+            int f=1;
+          Scanner sc=new Scanner(System.in);
+          System.out.println("Enter the team name");
+          String team=sc.nextLine();
+          System.out.println("Enter the number of players suggested");
+          int no=sc.nextInt();
+          int id[]=new int[no];
+          String name[]=new String[no];
+          for(int i=0;i<no;i++)
+          {
+              System.out.println("Enter player "+(i+1)+" details");
+              int p=sc.nextInt();
+              sc.nextLine();
+              id[i]=p;
+              String q=sc.nextLine();
+              name[i]=q;
+              
+          }
+          for(int i=0;i<no;i++)
+          {
+              for(int j=0;j<no;j++)
+              {
+                  if(i!=j)
+                  {
+                      if(id[i]==id[j])
+                      {
+                          f=0;
+                          break;
+                      }
+                  }
+              }
+          }
+          if(f==1)
+          {
+              for(int i=0;i<no;i++)
+              {
+                  System.out.println(id[i]+" "+name[i]);
+              }
+          }
+          else
+          {
+              try
+              {
+                  throw new DuplicateIdException("Player Id must be unique");
+              }
+              catch(DuplicateIdException e)
+              {
+                  System.out.println(e);
+              }
+          }
+          
+        
+    }
+}
+
+DuplicateIdException.java:================
+class DuplicateIdException extends Exception{
+
+    public DuplicateIdException() {
+    }
+
+    public DuplicateIdException(String message) {
+        super(message);
+    }
+    
+}
